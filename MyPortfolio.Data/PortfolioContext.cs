@@ -8,15 +8,14 @@ namespace MyPortfolio.Data
 {
     public class PortfolioContext : DbContext
     {
-
         public PortfolioContext() : base()
         {
 
         }
-
-        public PortfolioContext(DbContextOptions<DbContext> options)
+        public PortfolioContext(DbContextOptions<PortfolioContext> options)
             : base(options)
         {
+
         }
 
         public DbSet<Post> Posts { get; set; }
@@ -25,6 +24,9 @@ namespace MyPortfolio.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Language> Languages { get; set; }
 
+        //Using this creates a DB in the project. Use connectionstring in appsettings.json instead for a (localdb)?
+        //protected override void OnConfiguring(DbContextOptionsBuilder options)
+        //    => options.UseSqlite("Data Source=(localdb)\\mssqllocaldb\\MyPortfolio.db");
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

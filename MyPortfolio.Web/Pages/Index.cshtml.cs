@@ -23,7 +23,7 @@ namespace MyPortfolio.Web.Pages
         public void OnGet()
         {
             var context = new PortfolioContext();
-            //Using here?
+            ////Using here?
             using (context)
             {
 
