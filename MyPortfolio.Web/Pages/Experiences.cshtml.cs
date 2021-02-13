@@ -11,16 +11,22 @@ namespace MyPortfolio.Web.Pages
 {
     public class ExperiencesModel : PageModel
     {
+        private readonly PortfolioContext _context;
+
         public List<Post> Posts { get; set; }
+
+        public ExperiencesModel(PortfolioContext context)
+        {
+            _context = context;
+        }
 
         public void OnGet()
         {
-            var context = new PortfolioContext();
             //Get (numbered) list of blog posts with titles.
             //Create a viewmodel with required model data? Is this my viewmodel?
-            using (context)
+            using (_context)
             {
-                Posts = context.Posts.Where(p => p.CategoryId == 1).ToList();
+                Posts = _context.Posts.Where(p => p.CategoryId == 1).ToList();
             }
         }
     }
