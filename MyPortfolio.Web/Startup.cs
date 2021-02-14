@@ -26,7 +26,9 @@ namespace MyPortfolio.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            //Use connection string here?
+
+            //Hier zeg je dat je PortfolioContext wil dependency injecten, 
+            //Nu kun je deze class vragen in constructors van jou page model. Zie Experiences code behind
             services.AddDbContext<PortfolioContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("PortfolioDatabase")));
         }
