@@ -1,0 +1,34 @@
+﻿@page
+@model MyPortfolio.Web.Pages.PostEditModel
+@{
+}
+<h1>Edit</h1>
+<p>
+    <a asp-page="Edit">Editing @(Model.Post.Title)</a>
+</p>
+<form method="post" asp-page="PostEdit">
+    <p>
+        @*Set up proper label tag helper through [Display] attributes
+        <label asp-for="Post.Title"/>*@
+        <label asp-for="Post.Title">Title</label>
+        <input asp-for="Post.Title" type="text" />
+    </p>
+    <p>
+        <label asp-for="Post.CategoryId">Category</label>
+        <select asp-for="Post.CategoryId" asp-options=""
+                asp-items="@(new SelectList(Model.Categories,"Id","Name"))">
+            <option>Select Category</option>
+        </select>
+    </p>
+    
+    
+    @foreach (var content in Model.Contents)
+    {
+        <p>
+            @*Better way to do this?*@
+            <label>@Model.Languages.Where(l => l.Id == content.LanguageId).FirstOrDefault().Name</label>
+            <input asp-for="@content.Text" type="text" />
+        </p>
+    }
+
+</form>

@@ -1,0 +1,38 @@
+﻿@page
+@model MyPortfolio.Web.Pages.CreateModel
+@{
+    ViewData["Title"] = "Create New Post";
+}
+<h1>Create</h1>
+
+<p>
+    <a asp-page="Create">New Post</a>
+</p>
+<form asp-page="PostCreate" method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <label asp-for="Post.Title">Title</label>
+                </th>
+                <th>
+                    <label asp-for="Post.CategoryId">Category</label>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <input asp-for="Post.Title" type="text" id="Title" />
+                </td>
+                <td>
+                    <select asp-for="Post.CategoryId" asp-options=""
+                            asp-items="@(new SelectList(Model.Categories,"Id","Name"))">
+                        <option>Select Category</option>
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-success" id="sendPostButton">Create</button>
+</form>

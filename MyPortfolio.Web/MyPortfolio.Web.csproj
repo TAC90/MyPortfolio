@@ -23,8 +23,4 @@
     <ProjectReference Include="..\MyPortfolio.Data\MyPortfolio.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\Post\" />
-  </ItemGroup>
-
 </Project>

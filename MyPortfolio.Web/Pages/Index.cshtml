@@ -4,29 +4,38 @@
     ViewData["Title"] = "My Portfolio";
 }
 @*Simple Razor logic
-    <div>
-    @{ 
-        var sum = 1 + 2;
+        <div>
+        @{
+            var sum = 1 + 2;
 
-        var menu = new string[] { "coffee", "cake", "pizza" };
+            var menu = new string[] { "coffee", "cake", "pizza" };
 
-        <h2>The sum is : @sum</h2>
+            <h2>The sum is : @sum</h2>
 
-        @if(sum > 2)
+            @if(sum > 2)
+            {
+                <p>This was condititionally rendered.</p>
+            }
+    <ul>
+        @foreach (var item in menu)
         {
-            <p>This was condititionally rendered.</p>
+        <li>@item</li>
+
         }
-<ul>
-    @foreach (var item in menu)
-	{
-    <li>@item</li>
-		 
-	}
-</ul>
-    }
-</div>*@
+    </ul>
+        }
+    </div>*@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<li class="nav-link">
+    <h3>Quick dev links</h3>
+
+    <a href="/PostCreate">Create</a>
+    <br />    
+    <a href="/PostEdit?id=1">Edit 1</a>
+    <br />
+</li>
