@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using MyPortfolio.Data;
 using MyPortfolio.Data.Entities;
 
@@ -14,9 +16,7 @@ namespace MyPortfolio.Web.Pages
         private readonly PortfolioContext _context;
         [BindProperty]
         public Post Post { get; set; }
-        [BindProperty]
-        public List<Content> Contents { get; set; }
-        public List<Category> Categories { get; set; }
+        public List<SelectListItem> Categories { get; set; }
         public List<Language> Languages { get; set; }
         public PostEditModel(PortfolioContext context)
         {
@@ -28,11 +28,17 @@ namespace MyPortfolio.Web.Pages
             //if(!_context.Posts.Any(p => p.Id == id))
             //{
             //    //What to do when none found?
+            //    //Do I need `using` during these database inquiries and otherwise, or does DI handle this automatically?
             //}
-            Categories = _context.Categories.ToList();
+            Categories = _context.Categories.Select(c =>
+            new SelectListItem
+            {
+                Value = c.Id.ToString(),
+                Text = c.Name
+            }).ToList();
             Languages = _context.Languages.ToList();
-            Post = _context.Posts.Where(p => p.Id == id).FirstOrDefault();
-            Contents = Post.Content ?? new List<Content>();
+            Post = _context.Posts.Where(p => p.Id == id).Include(p => p.Content).FirstOrDefault();
+            var Contents = Post.Content ?? new List<Content>();
             //Check if content list has all languages
             if (Contents.Count != Languages.Count)
             {
@@ -51,10 +57,15 @@ namespace MyPortfolio.Web.Pages
                     }
                 }
             }
+            Console.WriteLine(string.Empty);
         }
         public void OnPost()
         {
-
+            _context.Update(Post);
+            //Update both changes individually, or will updating post also add the content?
+            //_context.Update(Contents);
+            //_context.SaveChanges();
+            Console.WriteLine(string.Empty);
         }
     }
 }

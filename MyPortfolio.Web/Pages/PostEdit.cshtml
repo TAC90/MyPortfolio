@@ -9,26 +9,28 @@
 <form method="post" asp-page="PostEdit">
     <p>
         @*Set up proper label tag helper through [Display] attributes
-        <label asp-for="Post.Title"/>*@
+            <label asp-for="Post.Title"/>*@
         <label asp-for="Post.Title">Title</label>
         <input asp-for="Post.Title" type="text" />
     </p>
     <p>
         <label asp-for="Post.CategoryId">Category</label>
         <select asp-for="Post.CategoryId" asp-options=""
-                asp-items="@(new SelectList(Model.Categories,"Id","Name"))">
+                asp-items="@Model.Categories">
+            @* @(new SelectList(Model.Categories,"Id","Name")) *@
             <option>Select Category</option>
         </select>
     </p>
-    
-    
-    @foreach (var content in Model.Contents)
+
+    @* Content Per Language Editor
+        Would be nice if it were raw html, or have some kind of markup *@
+    @for (int i = 0; i < Model.Post.Content.Count; i++)
     {
         <p>
             @*Better way to do this?*@
-            <label>@Model.Languages.Where(l => l.Id == content.LanguageId).FirstOrDefault().Name</label>
-            <input asp-for="@content.Text" type="text" />
+            <label>@Model.Languages.Where(l => l.Id == Model.Post.Content[i].LanguageId).FirstOrDefault().Name</label>
+            <input asp-for="@Model.Post.Content[i].Text" type="text" />
         </p>
     }
-
+    <button type="submit" class="btn btn-success" id="sendPostButton">Update</button>
 </form>
