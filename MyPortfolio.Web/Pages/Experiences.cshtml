@@ -4,19 +4,35 @@
     ViewData["Title"] = "My Experiences";
 }
 
-<ul>
-    @if (Model.Posts.Count > 0){
-        @foreach (var post in Model.Posts)
+
+@if (Model.Posts.Count > 0)
+{
+    @for (int i = 0; i < Model.Posts.Count; i++)
+    {
+        if (i % 2 == 0)
         {
-            <li>
-                <h1>@post.Title</h1>
-                <p>@post.Content[0].Text</p>
-            </li>
+            <div class="media py-3">
+                <img class="mr-3" src="http://placehold.it/64x64" alt="Placeholder" />
+                <div class="media-body">
+                    <h5 class="mt-0">@Model.Posts[i].Title</h5>
+                    @Model.Posts[i].Content[0].Text
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="media py-3 text-right">
+                <div class="media-body">
+                    <h5 class="mt-0">@Model.Posts[i].Title</h5>
+                    @Model.Posts[i].Content[0].Text
+                </div>
+                <img class="ml-3" src="http://placehold.it/64x64" alt="Placeholder" />
+            </div>
+            }
         }
     }
-    else {
-        <li>
-            <p>No posts found</p>
-        </li>
-    }
-</ul>
+else
+{
+    <p>No posts found</p>
+
+}
