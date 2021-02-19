@@ -39,5 +39,6 @@
         <label asp-for="Post.Public">Public: </label>
         <input asp-for="Post.Public" type="checkbox" />
     </p>
-    <button type="submit" class="btn btn-success" id="sendPostButton">Update</button>
+    <button type="submit" asp-route="@Model.Post.Id" class="btn btn-success" id="sendPostButton">Update</button>
+    <a asp-page="/Index/">Back</a>
 </form>
