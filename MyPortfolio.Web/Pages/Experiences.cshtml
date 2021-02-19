@@ -5,10 +5,18 @@
 }
 
 <ul>
-    @foreach (var post in Model.Posts)
-    {
+    @if (Model.Posts.Count > 0){
+        @foreach (var post in Model.Posts)
+        {
+            <li>
+                <h1>@post.Title</h1>
+                <p>@post.Content[0].Text</p>
+            </li>
+        }
+    }
+    else {
         <li>
-            <p>@post.Title</p>
+            <p>No posts found</p>
         </li>
     }
 </ul>

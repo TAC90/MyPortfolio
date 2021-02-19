@@ -4,19 +4,21 @@
 }
 <h1>Edit</h1>
 <p>
-    <a asp-page="Edit">Editing @(Model.Post.Title)</a>
+    <a asp-page="Edit">Editing @Model.Post.Title</a>
 </p>
 <form method="post" asp-page="PostEdit">
+    <input hidden asp-for="Post.Id" />
     <p>
         @*Set up proper label tag helper through [Display] attributes
             <label asp-for="Post.Title"/>*@
+        
         <label asp-for="Post.Title">Title</label>
         <input asp-for="Post.Title" type="text" />
     </p>
     <p>
         <label asp-for="Post.CategoryId">Category</label>
         <select asp-for="Post.CategoryId" asp-options=""
-                asp-items="@Model.Categories">
+                asp-items="Model.Categories">
             @* @(new SelectList(Model.Categories,"Id","Name")) *@
             <option>Select Category</option>
         </select>
@@ -26,11 +28,16 @@
         Would be nice if it were raw html, or have some kind of markup *@
     @for (int i = 0; i < Model.Post.Content.Count; i++)
     {
-        <p>
-            @*Better way to do this?*@
-            <label>@Model.Languages.Where(l => l.Id == Model.Post.Content[i].LanguageId).FirstOrDefault().Name</label>
-            <input asp-for="@Model.Post.Content[i].Text" type="text" />
-        </p>
+    <p>
+        <label>@Model.Languages.Where(l => l.Id == Model.Post.Content[i].LanguageId).FirstOrDefault().Name</label>
+        <input hidden asp-for="Post.Content[i].LanguageId" />
+        <input hidden asp-for="Post.Content[i].Id" />
+        <textarea asp-for="Post.Content[i].Text" type="text"></textarea>
+    </p>
     }
+    <p>
+        <label asp-for="Post.Public">Public: </label>
+        <input asp-for="Post.Public" type="checkbox" />
+    </p>
     <button type="submit" class="btn btn-success" id="sendPostButton">Update</button>
 </form>
