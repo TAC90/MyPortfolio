@@ -55,7 +55,8 @@ var options = {
 <text>
 var quill@(i) = new Quill('#rtEditor@(i)', options);
 var contentText@(i) = document.querySelector(".rtEditor@(i)");
-quill@(i).setText(contentText@(i).value);
+//quill@(i).setText(contentText@(i).value);
+quill@(i).root.innerHTML = contentText@(i).value;
 </text>
     }
 
