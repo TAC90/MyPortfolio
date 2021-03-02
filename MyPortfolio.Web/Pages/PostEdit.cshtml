@@ -6,7 +6,7 @@
 <p>
     <a asp-page="Edit">Editing @Model.Post.Title</a>
 </p>
-<form method="post" asp-page="PostEdit">
+<form method="post" class="formPost" asp-page="PostEdit">
     <input hidden asp-for="Post.Id" />
     <p>
         @*Set up proper label tag helper through [Display] attributes
@@ -32,7 +32,8 @@
         <label>@Model.Languages.Where(l => l.Id == Model.Post.Content[i].LanguageId).FirstOrDefault().Name</label>
         <input hidden asp-for="Post.Content[i].LanguageId" />
         <input hidden asp-for="Post.Content[i].Id" />
-        <textarea asp-for="Post.Content[i].Text" class="rtEditor@(i)" type="text"></textarea>
+        <textarea hidden asp-for="Post.Content[i].Text" class="rtEditor@(i)" type="text"></textarea>
+        <div id="rtEditor@(i)"></div>
     </p>
     }
     <p>
@@ -45,14 +46,29 @@
 <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
 <script type="text/javascript">
-    var options = {
-        debug: 'info',
-        readOnly: true,
-        theme: 'snow'
-    };
+var options = {
+    //debug: 'info',
+    //readOnly: false,
+    theme: 'snow'
+};
     @for (int i = 0; i < Model.Post.Content.Count; i++){
-    <text>
-    var editor@(i) = new Quill('.rtEditor@(i)', options);
-    </text>
+<text>
+var quill@(i) = new Quill('#rtEditor@(i)', options);
+var contentText@(i) = document.querySelector(".rtEditor@(i)");
+quill@(i).setText(contentText@(i).value);
+</text>
     }
+
+    var form = document.querySelector('.formPost');
+form.onsubmit = function(){
+@for (int i = 0; i < Model.Post.Content.Count; i++){
+<text>
+    var contentText@(i) = document.querySelector(".rtEditor@(i)");
+    contentText@(i).value = quill@(i).root.innerHTML;
+    console.log(contentText@(i).value);
+    //console.log(quill@(i).root.innerHTML);
+
+</text>
+}
+};
 </script>
