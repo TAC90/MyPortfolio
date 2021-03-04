@@ -12,10 +12,10 @@
         if (i % 2 == 0)
         {
             <div class="media py-3">
-                <img class="mr-3" src="http://placehold.it/64x64" alt="Placeholder" />
+                <img class="mr-3" src="https://placehold.it/64x64" alt="Placeholder" />
                 <div class="media-body">
                     <h5 class="mt-0">@Model.Posts[i].Title</h5>
-                    @Model.Posts[i].Content[0].Text
+                    @Html.Raw(Model.Posts[i].Content[0].Text)
                 </div>
             </div>
         }
@@ -24,9 +24,9 @@
             <div class="media py-3 text-right">
                 <div class="media-body">
                     <h5 class="mt-0">@Model.Posts[i].Title</h5>
-                    @Model.Posts[i].Content[0].Text
+                    @Html.Raw(Model.Posts[i].Content[0].Text)
                 </div>
-                <img class="ml-3" src="http://placehold.it/64x64" alt="Placeholder" />
+                <img class="ml-3" src="https://placehold.it/64x64" alt="Placeholder" />
             </div>
             }
         }
