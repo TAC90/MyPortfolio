@@ -10,6 +10,7 @@ namespace MyPortfolio.Data.Entities
         public int Id { get; set; }
         [StringLength(3)]
         public string Code { get; set; }
+        public string Code2 { get; set; }
         [Display(Name = "Language")]
         public string Name { get; set; }
     }

@@ -60,7 +60,7 @@ html {
 
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  /*margin-bottom: 60px;*/
 }
 .footer {
   position: absolute;
@@ -69,3 +69,40 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/* Custom additions
+-------------------------------------------------- */
+html {
+    padding-left: calc(100vw - 100%);
+    padding-right: 0;
+}
+body {
+    background-image: url('../img/Controller_Background.png');
+    background-size: 20%;
+}
+.content-container {
+    background-color: rgba(54, 57, 63, .8);
+}
+/* Scroll
+-------------------------------------------------- */
+/* width */
+::-webkit-scrollbar {
+    width: 16px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    background: #202225;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #2e3338;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #40444b;
+}
+/* Bootstrap addendums
+-------------------------------------------------- */
+/*.bg-alpha-80 {
+    opacity: 0.5;
+}*/

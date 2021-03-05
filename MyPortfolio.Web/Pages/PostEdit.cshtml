@@ -2,14 +2,14 @@
 @model MyPortfolio.Web.Pages.PostEditModel
 @{
 }
-<style>
+@*<style>
     .imageFloat:nth-of-type(2n+1){
         float:left;
     }
     .imageFloat:nth-of-type(2n) {
         float: right;
     }
-</style>
+</style>*@
 <h1>Edit</h1>
 <p>
     <a asp-page="Edit">Editing @Model.Post.Title</a>
@@ -27,7 +27,6 @@
         <label asp-for="Post.CategoryId">Category</label>
         <select asp-for="Post.CategoryId" asp-options=""
                 asp-items="Model.Categories">
-            @* @(new SelectList(Model.Categories,"Id","Name")) *@
             <option>Select Category</option>
         </select>
     </p>
