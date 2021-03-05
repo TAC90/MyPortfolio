@@ -25,10 +25,10 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Resources\Pages\Shared\_CulturePartial.en.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator></Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Pages\Shared\_CulturePartial.nl.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator></Generator>
     </EmbeddedResource>
   </ItemGroup>
 
