@@ -18,7 +18,7 @@ namespace MyPortfolio.Web.Pages
 
         public List<Post> Posts { get; set; }
 
-        public ExperiencesModel(PortfolioContext context, IViewLocalizer viewLocalizer)
+        public ExperiencesModel(PortfolioContext context)
         {
             _context = context;
         }

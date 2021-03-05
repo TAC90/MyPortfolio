@@ -73,26 +73,35 @@ body {
 /* Custom additions
 -------------------------------------------------- */
 html {
-    padding-left: calc(100vw - 100%);
-    padding-right: 0;
+    overflow: hidden;
+}
+html:hover{
+    overflow: auto;
+    /* Place scroll bar over content */
+    overflow: overlay;
 }
 body {
     background-image: url('../img/Controller_Background.png');
     background-size: 20%;
 }
-.content-container {
-    background-color: rgba(54, 57, 63, .8);
+
+.imageFloat:nth-of-type(2n+1) {
+    float: left;
 }
+.imageFloat:nth-of-type(2n) {
+    float: right;
+}
+
 /* Scroll
 -------------------------------------------------- */
 /* width */
 ::-webkit-scrollbar {
-    width: 16px;
+    width: 12px;
 }
 /* Track */
-::-webkit-scrollbar-track {
+/*::-webkit-scrollbar-track {
     background: #202225;
-}
+}*/
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: #2e3338;
@@ -103,6 +112,6 @@ body {
 }
 /* Bootstrap addendums
 -------------------------------------------------- */
-/*.bg-alpha-80 {
-    opacity: 0.5;
-}*/
+.bg-dark-a80 {
+    background-color: #2f3136e0;
+}
