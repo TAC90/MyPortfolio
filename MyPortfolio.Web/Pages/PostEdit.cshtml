@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{id:int}"
 @model MyPortfolio.Web.Pages.PostEditModel
 @{
 }
@@ -11,7 +11,7 @@
     <p>
         @*Set up proper label tag helper through [Display] attributes
             <label asp-for="Post.Title"/>*@
-        
+
         <label asp-for="Post.Title">Title</label>
         <input asp-for="Post.Title" type="text" />
     </p>
@@ -27,13 +27,13 @@
         Would be nice if it were raw html, or have some kind of markup *@
     @for (int i = 0; i < Model.Post.Content.Count; i++)
     {
-    <p>
-        <label>@Model.Languages.Where(l => l.Id == Model.Post.Content[i].LanguageId).FirstOrDefault().Name</label>
-        <input hidden asp-for="Post.Content[i].LanguageId" />
-        <input hidden asp-for="Post.Content[i].Id" />
-        <textarea hidden asp-for="Post.Content[i].Text" class="rtEditor@(i)" type="text"></textarea>
-        <div id="rtEditor@(i)"></div>
-    </p>
+        <p>
+            <label>@Model.Languages.Where(l => l.Id == Model.Post.Content[i].LanguageId).FirstOrDefault().Name</label>
+            <input hidden asp-for="Post.Content[i].LanguageId" />
+            <input hidden asp-for="Post.Content[i].Id" />
+            <textarea hidden asp-for="Post.Content[i].Text" class="rtEditor@(i)" type="text"></textarea>
+            <div id="rtEditor@(i)"></div>
+        </p>
     }
     <p>
         <label asp-for="Post.Public">Public: </label>

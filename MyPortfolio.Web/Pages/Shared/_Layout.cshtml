@@ -21,6 +21,9 @@
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-page="/AboutMe">About Me</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-page="/Experiences">Experiences</a>
                             </li>
                             <li class="nav-item">
@@ -35,14 +38,14 @@
             </nav>
         </header>
         <div class="container flex-grow-1 overflow-auto bg-dark-a80 pt-3">
-            <main role="main" class="pb-3">
+            <main role="main" class="">
                 @RenderBody()
             </main>
         </div>
 
-        <footer class="border-top modal-footer bg-dark text-muted">
+        <footer class="modal-footer bg-dark text-muted">
             <div class="container">
-                &copy; 2021 - MyPortfolio.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
+                &copy; T. A. C. 2021 - My Portfolio - <a asp-area="" asp-page="/Privacy">Privacy</a>
             </div>
         </footer>
     </div>

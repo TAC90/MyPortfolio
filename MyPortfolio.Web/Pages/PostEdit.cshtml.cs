@@ -23,14 +23,12 @@ namespace MyPortfolio.Web.Pages
         {
             _context = context;
         }
-        public void OnGet(int id)
+        public IActionResult OnGet(int id)
         {
-            //TODO: Implement check if id exists
-            //if(!_context.Posts.Any(p => p.Id == id))
-            //{
-            //    //What to do when none found?
-            //    //Do I need `using` during these database inquiries and otherwise, or does DI handle this automatically?
-            //}
+            if (!_context.Posts.Any(p => p.Id == id))
+            {
+                return RedirectToPage("Index");
+            }
             PopulateOptions();
             Post = _context.Posts.Where(p => p.Id == id).Include(p => p.Content).ThenInclude(c => c.Language).FirstOrDefault();
             var Contents = Post.Content ?? new List<Content>();
@@ -57,6 +55,7 @@ namespace MyPortfolio.Web.Pages
             }
             Post.Content = Contents;
             Console.WriteLine(string.Empty);
+            return Page();
         }
 
         private void PopulateOptions()

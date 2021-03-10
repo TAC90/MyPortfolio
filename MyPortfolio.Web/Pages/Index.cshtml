@@ -30,12 +30,15 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+<environment include="Development">
+    <li class="nav-link">
+        <h3>Quick dev links</h3>
 
-<li class="nav-link">
-    <h3>Quick dev links</h3>
-
-    <a href="/PostCreate">Create</a>
-    <br />    
-    <a href="/PostEdit?id=1">Edit 1</a>
-    <br />
-</li>
+        <a href="/PostCreate">Create</a>
+        <br />
+        <a asp-page="Posts">Posts</a>
+        <br/>
+        <a asp-page="PostEdit" asp-route-id="1">Edit 1</a>
+        <br />
+    </li>
+</environment>

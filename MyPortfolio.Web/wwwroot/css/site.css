@@ -84,6 +84,13 @@ body {
     background-image: url('../img/Controller_Background.png');
     background-size: 20%;
 }
+.media p{
+    margin:0;
+}
+.checkbox-large{
+    width:20px;
+    height:20px;
+}
 
 .imageFloat:nth-of-type(2n+1) {
     float: left;
