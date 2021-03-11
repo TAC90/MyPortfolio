@@ -23,16 +23,20 @@ namespace MyPortfolio.Web.Pages
             _context = context;
         }
 
-        public void OnGet()
+        public ActionResult OnGet(int id)
         {
+            int languageId = GetLanguageId();
+            if (id != 0)
+            {
+                Posts = _context.Posts
+                    .Where(p => p.Id == id)
+                    .Include(p => p.Content.Where(c => c.LanguageId == languageId))
+                    .ToList();
+                return Page();
+            }
             const int category = 2;
             const int indexCategory = 1;
-            //TODO: Turn below into method approachable from anywhere, extension method?
-            var cookieValue = Request.Cookies[CookieRequestCultureProvider.DefaultCookieName];
-            var language = CookieRequestCultureProvider.ParseCookieValue(cookieValue);
-            string languageCode = language.Cultures[0].Value;
-            var languageId = _context.Languages.Where(l => l.Code2 == languageCode).FirstOrDefault().Id;
-            
+
             //TODO: Get (numbered) list of blog posts with titles.
             Posts = _context.Posts
                 .Where(p => p.CategoryId == category)
@@ -45,6 +49,17 @@ namespace MyPortfolio.Web.Pages
                 .Where(p => p.CategoryId == indexCategory && p.Title == "Experiences")
                 .Include(p => p.Content.Where(c => c.LanguageId == languageId))
                 .FirstOrDefault());
+            return Page();
+        }
+
+        private int GetLanguageId()
+        {
+            //TODO: Turn below into method approachable from anywhere, extension method?
+            var cookieValue = Request.Cookies[CookieRequestCultureProvider.DefaultCookieName];
+            var language = CookieRequestCultureProvider.ParseCookieValue(cookieValue);
+            string languageCode = language.Cultures[0].Value;
+            var languageId = _context.Languages.Where(l => l.Code2 == languageCode).FirstOrDefault().Id;
+            return languageId;
         }
     }
 }

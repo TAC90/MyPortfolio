@@ -28,8 +28,8 @@ namespace MyPortfolio.Web.Pages
             var cookieValue = Request.Cookies[CookieRequestCultureProvider.DefaultCookieName];
             var language = CookieRequestCultureProvider.ParseCookieValue(cookieValue);
             string languageCode = language.Cultures[0].Value;
-
             var languageId = _context.Languages.Where(l => l.Code2 == languageCode).FirstOrDefault().Id;
+
             Posts = _context.Posts
                 .Where(p => p.CategoryId == 1 && p.Title == "AboutMe")
                 .Include(p => p.Content.Where(c => c.LanguageId == languageId))

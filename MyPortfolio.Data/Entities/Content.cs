@@ -7,6 +7,7 @@ namespace MyPortfolio.Data.Entities
     public class Content
     {
         public int Id { get; set; }
+        public string Description { get; set; }
         public string Text { get; set; }
         public int LanguageId { get; set; }
         public Language Language { get; set; }

@@ -17,7 +17,6 @@ namespace MyPortfolio.Web.Pages
         [BindProperty]
         public Post Post { get; set; }
         public List<SelectListItem> Categories { get; set; }
-        //[BindProperty]
         public List<Language> Languages { get; set; }
         public PostEditModel(PortfolioContext context)
         {
@@ -50,8 +49,8 @@ namespace MyPortfolio.Web.Pages
                         });
                     }
                 }
-                //_context.Update(Post);
-                //_context.SaveChanges();
+                _context.Update(Post);
+                _context.SaveChanges();
             }
             Post.Content = Contents;
             Console.WriteLine(string.Empty);
@@ -73,6 +72,7 @@ namespace MyPortfolio.Web.Pages
         {
             Post.Modified = DateTime.Now;
             //TODO: Check if content text was modified, update if so. Use StateChanged event?
+            //TODO: See if there's a better way to handle images and how they are saved, right now it's done automatically by QuillJS by saving it as a base64 string
             _context.Update(Post);
             //Update both changes individually, or will updating post also add the content?
             //_context.Update(Contents);
@@ -82,3 +82,5 @@ namespace MyPortfolio.Web.Pages
         }
     }
 }
+
+//TODO: Add ability to remove entries

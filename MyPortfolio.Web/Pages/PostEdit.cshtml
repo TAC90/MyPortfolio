@@ -6,7 +6,7 @@
 <p>
     <a asp-page="Edit">Editing @Model.Post.Title</a>
 </p>
-<form method="post" class="formPost" asp-page="PostEdit">
+<form method="post" id="editForm" asp-page="PostEdit">
     <input hidden asp-for="Post.Id" />
     <p>
         @*Set up proper label tag helper through [Display] attributes
@@ -27,63 +27,87 @@
         Would be nice if it were raw html, or have some kind of markup *@
     @for (int i = 0; i < Model.Post.Content.Count; i++)
     {
-        <p>
-            <label>@Model.Languages.Where(l => l.Id == Model.Post.Content[i].LanguageId).FirstOrDefault().Name</label>
-            <input hidden asp-for="Post.Content[i].LanguageId" />
+        <div class="py-3">
             <input hidden asp-for="Post.Content[i].Id" />
-            <textarea hidden asp-for="Post.Content[i].Text" class="rtEditor@(i)" type="text"></textarea>
-            <div id="rtEditor@(i)"></div>
-        </p>
+            <input hidden asp-for="Post.Content[i].LanguageId" />
+            <div>
+                <label class="h5">@Model.Languages.Where(l => l.Id == Model.Post.Content[i].LanguageId).FirstOrDefault().Name</label>
+            </div>
+            <div>
+                <p>Description</p>
+                <textarea asp-for="Post.Content[i].Description" class="text-body bg-dark" type="text" style="width:800px; min-height:100px;"></textarea>
+            </div>
+            <div>
+                <p>Content</p>
+                <textarea hidden asp-for="Post.Content[i].Text" class="rtEditor@(i)" type="text"></textarea>
+                <div id="rtEditor@(i)"></div>
+            </div>
+        </div>
     }
     <p>
         <label asp-for="Post.Public">Public: </label>
         <input asp-for="Post.Public" type="checkbox" />
     </p>
     <button type="submit" asp-route="@Model.Post.Id" class="btn btn-success" id="sendPostButton">Update</button>
-    <a asp-page="/Index/">Back</a>
+    <a asp-page="/Posts/" class="btn btn-danger">Back</a>
 </form>
 <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
 <script type="text/javascript">
-var options = {
-    modules: {
-        toolbar: [
-            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-            [{ 'font': [] }],
-            ['bold', 'italic', 'underline', 'strike'],
-            [{ 'script': 'sub' }, { 'script': 'super' }],
-            [{ 'color': [] }, { 'background': [] }],
-            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-            ['image', 'video', 'code-block', 'blockquote'],
-            [{ 'align': [] }],
-            ['clean']
-        ]
-    },
-    //debug: 'info',
-    //readOnly: false,
-    theme: 'snow'
+    var options = {
+        modules: {
+            toolbar: [
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                [{ 'font': [] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ 'script': 'sub' }, { 'script': 'super' }],
+                [{ 'color': [] }, { 'background': [] }],
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                ['image', 'video', 'code-block', 'blockquote'],
+                [{ 'align': [] }],
+                ['clean']
+            ]
+        },
+        //debug: 'info',
+        //readOnly: false,
+        theme: 'snow'
     };
 
-var Image = Quill.import('formats/image');
-Image.className = 'imageFloat';
-Quill.register(Image, true);
-@for (int i = 0; i < Model.Post.Content.Count; i++){
-<text>
-var quill@(i) = new Quill('#rtEditor@(i)', options);
-var contentText@(i) = document.querySelector(".rtEditor@(i)");
-quill@(i).root.innerHTML = contentText@(i).value;
-
-</text>
-}
-
-var form = document.querySelector('.formPost');
-form.onsubmit = function(){
-@for (int i = 0; i < Model.Post.Content.Count; i++){
-<text>
+    var Image = Quill.import('formats/image');
+    Image.className = 'imageFloat';
+    Quill.register(Image, true);
+    @for (int i = 0; i < Model.Post.Content.Count; i++){
+        <text>
+    var quill@(i) = new Quill('#rtEditor@(i)', options);
     var contentText@(i) = document.querySelector(".rtEditor@(i)");
-    contentText@(i).value = quill@(i).root.innerHTML;
-    //console.log(contentText@(i).value);
-</text>
-}
-};
+    quill@(i).root.innerHTML = contentText@(i).value;
+
+    </text>
+    }
+
+    var form = document.querySelector('#editForm');
+
+    form.onsubmit = function () {
+        @for (int i = 0; i < Model.Post.Content.Count; i++){
+            <text>
+        var contentText@(i) = document.querySelector(".rtEditor@(i)");
+        contentText@(i).value = quill@(i).root.innerHTML;
+        //console.log(contentText@(i).value);
+        </text>
+        }
+    };
+
+    $(window).bind('keydown', function (event) {
+        if (event.ctrlKey || event.metaKey) {
+            switch (String.fromCharCode(event.which).toLowerCase()) {
+                case 's':
+                    event.preventDefault();
+                    console.log('submitting form');
+                    $('#editForm').submit();
+                    break;
+            }
+        }
+    });
+
 </script>
