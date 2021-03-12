@@ -31,7 +31,8 @@ namespace MyPortfolio.Web
             services.AddRazorPages().AddViewLocalization()
                 .AddRazorPagesOptions(options => {
                     options.Conventions
-                    .AddPageRoute("/P/Details", "P/{category}/{id}");
+                    .AddPageRoute("/P/Details", "{category}/{id}") //Such sneak, many risk, much result
+                    .AddPageRoute("/P/Index", "{category}");
                 });
             services.AddControllers();
             services.Configure<RequestLocalizationOptions>(options =>
