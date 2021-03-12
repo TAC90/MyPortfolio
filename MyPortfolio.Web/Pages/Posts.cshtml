@@ -28,12 +28,12 @@
                 <input type="checkbox" class="checkbox-large" disabled checked="@Model.Posts[i].Public" />
             </td>
             <td style="width:1px; white-space:nowrap;">
-                    <a asp-page="PostEdit" asp-route-id="@Model.Posts[i].Id" class="btn btn-sm btn-success">
-                        Edit
-                    </a>
-                    <a asp-page-handler="Delete" asp-route-id="@Model.Posts[i].Id" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-sm btn-danger">
-                        Delete
-                    </a>
+                <a asp-page="PostEdit" asp-route-id="@Model.Posts[i].Id" class="btn btn-sm btn-success">
+                    Edit
+                </a>
+                <a asp-page-handler="Delete" asp-route-id="@Model.Posts[i].Id" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-sm btn-danger">
+                    Delete
+                </a>
             </td>
         </tr>
         }

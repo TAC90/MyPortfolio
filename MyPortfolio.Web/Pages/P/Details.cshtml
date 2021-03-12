@@ -1,0 +1,15 @@
+﻿@page "{category}/{id:int}"
+@model MyPortfolio.Web.Pages.P.DetailsModel
+@{
+    ViewData["Title"] = Model.Post.Title;
+}
+<article class="bg-dark mb-3 px-3">
+    <div class="media py-3">
+        <img class="mr-3" src="https://placehold.it/64x64" alt="Placeholder" />
+        <div class="media-body">
+            <h5 class="mt-0">@Model.Post.Title</h5>
+            @Html.Raw(Model.Post.Content[0].Text)
+        </div>
+    </div>
+</article>
+<a asp-page="/P/Index" asp-route-category="Experiences" class="btn btn-success mb-3">Back</a>

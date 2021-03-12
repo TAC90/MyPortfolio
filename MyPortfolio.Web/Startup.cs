@@ -28,7 +28,11 @@ namespace MyPortfolio.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages().AddViewLocalization();
+            services.AddRazorPages().AddViewLocalization()
+                .AddRazorPagesOptions(options => {
+                    options.Conventions
+                    .AddPageRoute("/P/Details", "P/{category}/{id}");
+                });
             services.AddControllers();
             services.Configure<RequestLocalizationOptions>(options =>
             {
@@ -43,8 +47,6 @@ namespace MyPortfolio.Web
             });
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-            //Hier zeg je dat je PortfolioContext wil dependency injecten, 
-            //Nu kun je deze class vragen in constructors van jou page model. Zie Experiences code behind
             services.AddDbContext<PortfolioContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("PortfolioDatabase")));
         }
