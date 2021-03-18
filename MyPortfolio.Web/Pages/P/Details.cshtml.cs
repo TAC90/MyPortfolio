@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -43,11 +43,8 @@ namespace MyPortfolio.Web.Pages.P
         private int GetLanguageId()
         {
             //TODO: Turn below into method approachable from anywhere, extension method?
-            var cookieValue = Request.Cookies[CookieRequestCultureProvider.DefaultCookieName];
-            var language = CookieRequestCultureProvider.ParseCookieValue(cookieValue);
-            string languageCode = language.Cultures[0].Value;
-            var languageId = _context.Languages.Where(l => l.Code2 == languageCode).FirstOrDefault().Id;
-            return languageId;
+            var language = _context.Languages.Where(l => l.Code2 == CultureInfo.CurrentCulture.TwoLetterISOLanguageName).FirstOrDefault();
+            return language != null ? language.Id : 1;
         }
     }
 }

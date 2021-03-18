@@ -29,6 +29,7 @@ namespace MyPortfolio.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages().AddViewLocalization();
+                //This adds an ADDITIONAL route. Change @page on the cshtml itself to make an ABSOLUTE route
                 //.AddRazorPagesOptions(options => {
                 //     options.Conventions
                 //     .AddPageRoute("/P/Details", "{category}/{id}")
