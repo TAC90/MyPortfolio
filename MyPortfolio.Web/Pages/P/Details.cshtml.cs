@@ -30,7 +30,7 @@ namespace MyPortfolio.Web.Pages.P
             }
             Category = _context.Categories.Single(c => c.Name == category);
             //Both checking for any and placing category in object, is there a better way? Put category in object, then check for null? Do 2 context queries even slow things down?
-            int languageId = GetLanguageId();
+            int languageId = _context.GetLanguageId();
             Post = _context.Posts
                     .Where(p => p.Id == id)
                     .Include(p => p.Content.Where(c => c.LanguageId == languageId))
@@ -40,11 +40,6 @@ namespace MyPortfolio.Web.Pages.P
             return Page();
         }
 
-        private int GetLanguageId()
-        {
-            //TODO: Turn below into method approachable from anywhere, extension method?
-            var language = _context.Languages.Where(l => l.Code2 == CultureInfo.CurrentCulture.TwoLetterISOLanguageName).FirstOrDefault();
-            return language != null ? language.Id : 1;
-        }
+        
     }
 }

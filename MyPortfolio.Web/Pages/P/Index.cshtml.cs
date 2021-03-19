@@ -30,7 +30,7 @@ namespace MyPortfolio.Web.Pages.P
             }
             Category = _context.Categories.Single(c => c.Name == category);
             int categoryId = Category.Id;
-            int languageId = GetLanguageId();
+            int languageId = _context.GetLanguageId();
             const int indexCategory = 1;
 
             //TODO: Get (numbered) list of blog posts with titles.
@@ -48,13 +48,6 @@ namespace MyPortfolio.Web.Pages.P
                 .FirstOrDefault());
             if (Posts[0] == null) return NotFound();
             return Page();
-        }
-
-        private int GetLanguageId()
-        {
-            //TODO: Turn below into method approachable from anywhere, extension method?
-            var language = _context.Languages.Where(l => l.Code2 == CultureInfo.CurrentCulture.TwoLetterISOLanguageName).FirstOrDefault();
-            return language != null ? language.Id : 1;
         }
     }
 }

@@ -74,8 +74,6 @@ namespace MyPortfolio.Web.Pages
             //TODO: Check if content text was modified, update if so. Use StateChanged event?
             //TODO: See if there's a better way to handle images and how they are saved, right now it's done automatically by QuillJS by saving it as a base64 string
             _context.Update(Post);
-            //Update both changes individually, or will updating post also add the content?
-            //_context.Update(Contents);
             _context.SaveChanges();
             Console.WriteLine(string.Empty);
             PopulateOptions();

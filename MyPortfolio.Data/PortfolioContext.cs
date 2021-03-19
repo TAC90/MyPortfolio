@@ -2,6 +2,8 @@
 using MyPortfolio.Data.Entities;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace MyPortfolio.Data
@@ -19,6 +21,12 @@ namespace MyPortfolio.Data
         public DbSet<Screenshot> Screenshots { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Language> Languages { get; set; }
+
+        public int GetLanguageId()
+        {
+            var language = Languages.Where(l => l.Code2 == CultureInfo.CurrentCulture.TwoLetterISOLanguageName).FirstOrDefault();
+            return language != null ? language.Id : 1;
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
