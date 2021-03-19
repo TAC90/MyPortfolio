@@ -1,4 +1,6 @@
 ﻿@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
 @model MyPortfolio.Web.Pages.PostsModel
 @{
     ViewData["Title"] = "Post List";
@@ -6,41 +8,41 @@
 @if (Model.Posts.Count > 0)
 {
 
-<table class="table table-striped table-sm border">
-    <tr class="table-secondary">
-        <th>
-            Post
-        </th>
-        <th>
-            Public
-        </th>
-        <th>
-            Action
-        </th>
-    </tr>
-    @for (int i = 0; i < Model.Posts.Count; i++)
-    {
-        <tr>
-            <td class="px-2">
-                @Model.Posts[i].Title
-            </td>
-            <td>
-                <input type="checkbox" class="checkbox-large" disabled checked="@Model.Posts[i].Public" />
-            </td>
-            <td style="width:1px; white-space:nowrap;">
-                <a asp-page="PostEdit" asp-route-id="@Model.Posts[i].Id" class="btn btn-sm btn-success">
-                    Edit
-                </a>
-                <a asp-page-handler="Delete" asp-route-id="@Model.Posts[i].Id" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-sm btn-danger">
-                    Delete
-                </a>
-            </td>
+    <table class="table table-striped table-sm border">
+        <tr class="table-secondary">
+            <th>
+                Post
+            </th>
+            <th>
+                Public
+            </th>
+            <th>
+                Action
+            </th>
         </tr>
+        @for (int i = 0; i < Model.Posts.Count; i++)
+        {
+            <tr>
+                <td class="px-2">
+                    @Model.Posts[i].Title
+                </td>
+                <td>
+                    <input type="checkbox" class="checkbox-large" disabled checked="@Model.Posts[i].Public" />
+                </td>
+                <td style="width:1px; white-space:nowrap;">
+                    <a asp-page="PostEdit" asp-route-id="@Model.Posts[i].Id" class="btn btn-sm btn-success">
+                        Edit
+                    </a>
+                    <a asp-page-handler="Delete" asp-route-id="@Model.Posts[i].Id" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-sm btn-danger">
+                        Delete
+                    </a>
+                </td>
+            </tr>
         }
-</table> 
+    </table>
 }
 else
 {
-<p>No posts found</p>
+    <p>No posts found</p>
 
 }
