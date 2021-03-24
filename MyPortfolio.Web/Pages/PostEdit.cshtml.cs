@@ -70,8 +70,14 @@ namespace MyPortfolio.Web.Pages
 
         public void OnPost()
         {
+            var originalPost = _context.Posts.AsNoTracking().Where(p => p.Id == Post.Id).Include(p => p.Content).FirstOrDefault();
             Post.Modified = DateTime.Now;
+            Post.Created = originalPost.Created;
             //TODO: Check if content text was modified, update if so. Use StateChanged event?
+            foreach (var content in Post.Content)
+            {
+                content.Modified = DateTime.Now;
+            }
             //TODO: See if there's a better way to handle images and how they are saved, right now it's done automatically by QuillJS by saving it as a base64 string
             _context.Update(Post);
             _context.SaveChanges();
