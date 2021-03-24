@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace MyPortfolio.Web
+namespace MyPortfolioDb
 {
     public class IdentityContext : IdentityDbContext<IdentityUser>
     {

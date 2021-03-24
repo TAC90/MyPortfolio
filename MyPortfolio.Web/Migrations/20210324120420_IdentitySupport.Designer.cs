@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MyPortfolio.Web;
+using MyPortfolioDb;
 
 namespace MyPortfolio.Web.Migrations
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20210319133649_IdentitySupport")]
+    [Migration("20210324120420_IdentitySupport")]
     partial class IdentitySupport
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

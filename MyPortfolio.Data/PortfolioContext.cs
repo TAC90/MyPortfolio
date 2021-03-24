@@ -48,9 +48,10 @@ namespace MyPortfolio.Data
                 new Language { Id = 2, Name = "Dutch", Code = "NLD" }
                 );
             builder.Entity<Category>().HasData(
-                new Category { Id = 1, Name = "Experience" },
-                new Category { Id = 2, Name = "Concepts" },
-                new Category { Id = 3, Name = "Designed" }
+                new Category { Id = 1, Name = "Index"},
+                new Category { Id = 2, Name = "Experience" },
+                new Category { Id = 3, Name = "Concepts" },
+                new Category { Id = 4, Name = "Designed" }
                 );
         }
     }

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MyPortfolio.Web;
+using MyPortfolioDb;
 
 [assembly: HostingStartup(typeof(MyPortfolio.Web.Areas.Identity.IdentityHostingStartup))]
 namespace MyPortfolio.Web.Areas.Identity
