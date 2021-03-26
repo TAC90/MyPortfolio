@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -14,10 +16,9 @@
 <body>
     <div id="container" class="d-flex flex-column overflow-auto min-vh-100">
         <header>
-            @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom border- box-shadow">*@
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark box-shadow">
                 <div class="container">
-                    <a class="navbar-brand" asp-area="" asp-page="/Index">My Portfolio</a>
+                    <a class="navbar-brand" asp-area="" asp-page="/Index">@Localizer["My Portfolio"]</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -25,13 +26,13 @@
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-page="/AboutMe">About Me</a>
+                                <a class="nav-link" asp-area="" asp-page="/AboutMe">@Localizer["About Me"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-page="/P/Index" asp-route-category="Experiences">Experiences</a>
+                                <a class="nav-link" asp-page="/P/Index" asp-route-category="Experiences">@Localizer["Experiences"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-page="/P/Index" asp-route-category="Concepts">Concepts</a>
+                                <a class="nav-link" asp-page="/P/Index" asp-route-category="Concepts">@Localizer["Concepts"]</a>
                             </li>
                         </ul>
                     </div>
@@ -57,6 +58,6 @@
 
 
     @RenderSection("Scripts", required: false)
-        
+
 </body>
 </html>

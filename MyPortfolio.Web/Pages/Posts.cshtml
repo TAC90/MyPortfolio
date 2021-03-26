@@ -44,9 +44,12 @@
                     <a asp-page="PostEdit" asp-route-id="@Model.Posts[i].Id" class="btn btn-sm btn-success">
                         Edit
                     </a>
-                    <a asp-page-handler="Delete" asp-route-id="@Model.Posts[i].Id" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-sm btn-danger">
-                        Delete
-                    </a>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@Model.Posts[i].Id">
+                        @*@Html.Hidden("Id", Model.Posts[i].Id)*@
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-sm btn-danger">
+                            Delete
+                        </button>
+                    </form>
                 </td>
             </tr>
         }
